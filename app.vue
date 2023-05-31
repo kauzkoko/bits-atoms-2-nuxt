@@ -39,6 +39,9 @@ useHead({
 		},
 	],
 })
+
+const { width, height } = useWindowSize()
+const { x, y } = useMouse()
 const source = ref(0)
 const transition = () => {
 	source.value = source.value === 0 ? 360 : 0
@@ -56,13 +59,13 @@ const styleSkew = computed(() => {
 
 const styleRotate = computed(() => {
 	return {
-		transform: `rotate3d(1, 1, 1, ${output.value}deg)`,
+	transform: `rotate3d(1, 1, 1, ${output.value}deg)`,
 	}
 })
 
 const styleRotateY = computed(() => {
 	return {
-		transform: `rotate3d(0, 1, 0, ${output.value}deg)`,
+		transform: `rotate3d(0, 1, 0, ${output.value}deg) translate(${x.value/100}px, ${y.value/100}px)`,
 	}
 })
 </script>
@@ -91,6 +94,7 @@ const styleRotateY = computed(() => {
 	padding: 40px 40px;
 	background: radial-gradient(50% 50% at 50% 50%, #ffffff 0%, #6b9fe4 100%);
 	border-radius: 8px;
+	transition: all .1s;
 }
 
 /** 
